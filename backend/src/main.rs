@@ -1,6 +1,11 @@
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use actix_files::{NamedFile};
 
+struct credentials {
+    username: String,
+    password: String,
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let port: u16 = 8080;
@@ -13,4 +18,10 @@ async fn main() -> std::io::Result<()> {
     .bind(("localhost", port))?
     .run()
     .await
+}
+
+// Credentials handling and listening will be added later
+#[post("/login")]
+async fn login(req_body: String) -> impl Responder {
+    HttpResponse::Ok().body(req_body)
 }
